@@ -99,32 +99,69 @@
 # 
 # Алгоритм Дейкстры 
 
-graph = {}
-costs = {}
-parents = {}
+# graph = {}
+# costs = {}
+# parents = {}
 
-graph["start"] ={}
-graph["start"]['a'] = 6
-graph['start']['b'] = 2
-graph['a'] = {}
-graph['a']['fin'] = 1
-graph['b'] = {}
-graph['b']['a'] = 3
-graph['b']['fin'] = 5
-graph[ 'fin'] ={}
+# graph["start"] ={}
+# graph["start"]['a'] = 6
+# graph['start']['b'] = 2
+# graph['a'] = {}
+# graph['a']['fin'] = 1
+# graph['b'] = {}
+# graph['b']['a'] = 3
+# graph['b']['fin'] = 5
+# graph[ 'fin'] ={}
 
-infinity = float('inf')
+# infinity = float('inf')
 
-costs = {}
-costs['a'] =6
-costs['b'] = 2
-costs['fin'] = infinity
+# costs = {}
+# costs['a'] =6
+# costs['b'] = 2
+# costs['fin'] = infinity
 
-parents = {}
-parents['a'] = 'start'
-parents['b'] = 'start'
-parents['in'] = None
+# parents = {}
+# parents['a'] = 'start'
+# parents['b'] = 'start'
+# parents['in'] = None
 
-processed = []
+# processed = []
+
+# def find_loest_code_node(cost):
+#     lowest_code = float("inf")
+#     lowest_code_node = None
+#     for node in costs:
+#         cost = costs(node)
+#         if cost < lowest_code and node not in processed:
+#             lowest_code = cost 
+#             lowest_code_node = node 
+#     return lowest_code_node
 
 # print(graph['start'].keys())
+
+#  Жадный алгоритм Задача о покрытии множества
+
+states_needed = set(['mt','wa','or','id','nv','ut','ca','az'])
+
+stations = {}
+stations['kone'] = set(['id','nv','ut'])
+stations['ktwo'] = set(['wa','id','mt'])
+stations['kthree'] = set(['or','nv','ca'])
+stations['kfour'] = set(['nv','ut'])
+stations['kfive'] = set(['ca','az'])
+
+final_stations = set()
+while states_needed:
+    best_station = None
+    states_covered = set()
+    for station, states_for_station in stations.items():
+        covered = states_needed & states_for_station
+        if len(covered) > len(states_covered):
+            best_station = station
+            states_covered = covered
+
+    final_stations.add(best_station)
+
+    states_needed -= states_covered
+
+print (final_stations)
